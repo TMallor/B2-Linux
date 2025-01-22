@@ -27,8 +27,574 @@ CIS est une boîte qui notamment édite des guides de configuration
 - notamment les OS Linux
 
 🌞 **Suivre un guide CIS**
+```bash
+[root@localhost ~]# rpm -q  autofs
+package autofs is not installed
+
+[root@localhost ~]# rpm -q avahi
+package avahi is not installed
+
+[root@localhost ~]# rpm -q dhcp-server
+package dhcp-server is not installed
+
+[root@localhost ~]# rpm -q bind
+package bind is not installed
+
+[root@localhost ~]# rpm -q dnsmasq
+package dnsmasq is not installed
+
+[root@localhost ~]# rpm -q samba
+package samba is not installed
+
+[root@localhost ~]# rpm -q vsftpd
+package vsftpd is not installed
+
+[root@localhost ~]# rpm -q dovecot cyrus-imapd
+package dovecot is not installed
+package cyrus-imapd is not installed
+
+[root@localhost ~]# rpm -q nfs-utils
+package nfs-utils is not installed
+
+[root@localhost ~]# rpm -q ypserv
+package ypserv is not installed
+
+[root@localhost ~]# rpm -q cups
+package cups is not installed
+
+[root@localhost ~]# rpm -q rpcbind
+package rpcbind is not installed
+
+[root@localhost ~]# rpm -q rsync-daemon
+package rsync-daemon is not installed
+
+[root@localhost ~]# rpm -q net-snmp
+package net-snmp is not installed
+
+[root@localhost ~]# rpm -q tftp-server
+package tftp-server is not installed
+
+[root@localhost ~]# rpm -q squid
+package squid is not installed
+
+[root@localhost ~]# rpm -q httpd nginx
+package httpd is not installed
+package nginx is not installed
+
+[root@localhost ~]# rpm -q xinetd
+package xinetd is not installed
+
+[root@localhost ~]# rpm -q xorg-x11-server-common
+package xorg-x11-server-common is not installed
+
+[root@localhost ~]# bash script.sh 
+script.sh: line 9: postconf: command not found
+
+- Audit Result:
+ ** PASS **
+
+ - Port "25" is not listening on a non-loopback network interface
+ - Port "465" is not listening on a non-loopback network interface
+ - Port "587" is not listening on a non-loopback network interface
+
+[root@localhost ~]# ss -plntu
+Netid           State            Recv-Q           Send-Q                     Local Address:Port                       Peer Address:Port           Process                                     
+udp             UNCONN           0                0                              127.0.0.1:323                             0.0.0.0:*               users:(("chronyd",pid=705,fd=5))           
+udp             UNCONN           0                0                                  [::1]:323                                [::]:*               users:(("chronyd",pid=705,fd=6))           
+tcp             LISTEN           0                128                              0.0.0.0:22                              0.0.0.0:*               users:(("sshd",pid=738,fd=3))              
+tcp             LISTEN           0                128                                 [::]:22                                 [::]:*               users:(("sshd",pid=738,fd=4)) 
+
+[root@localhost ~]# bash script.sh 
+
+- IPv6 is enabled
+
+[root@localhost ~]# bash script.sh 
+
+- Audit Result:
+ ** PASS **
+
+ - System has no wireless NICs installed
+
+
+[root@localhost ~]# rpm -q bluez
+package bluez is not installed
+
+[root@localhost ~]# bash script.sh 
+
+- Audit Result:
+ ** PASS **
+ - kernel module: "dccp" doesn't exist in "/usr/lib/modules/5.14.0-427.13.1.el9_4.x86_64/kernel/net"
+ - kernel module: "dccp" doesn't exist in "/usr/lib/modules/5.14.0-427.40.1.el9_4.x86_64/kernel/net"
+
+
+[root@localhost ~]# bash script.sh 
+
+
+ -- INFO --
+ - module: "tipc" exists in:
+ - "/usr/lib/modules/5.14.0-427.13.1.el9_4.x86_64/kernel/net"
+ - "/usr/lib/modules/5.14.0-427.40.1.el9_4.x86_64/kernel/net"
+
+- Audit Result:
+ ** FAIL **
+ - Reason(s) for audit failure:
+ - kernel module: "tipc" is loadable
+ - kernel module: "tipc" is not deny listed
+- Correctly set:
+ - kernel module: "tipc" is not loaded
+[root@localhost ~]# bash script.sh 
+script.sh: line 30: /usr/lib/modules/5.14.0-427.13.1.el9_4.x86_64/kernel/net/tipc: Is a directory
+script.sh: line 30: /usr/lib/modules/5.14.0-427.40.1.el9_4.x86_64/kernel/net/tipc: Is a directory
+
+
+ -- INFO --
+ - module: "tipc" exists in:
+ - "/usr/lib/modules/5.14.0-427.13.1.el9_4.x86_64/kernel/net"
+ - "/usr/lib/modules/5.14.0-427.40.1.el9_4.x86_64/kernel/net"
+ - setting kernel module: "tipc" to "/bin/false"
+ - denylisting kernel module: "tipc"
+
+ - remediation of kernel module: "tipc" complete
+
+[root@localhost ~]# bash script.sh 
+
+- Audit Result:
+ ** PASS **
+ - kernel module: "rds" doesn't exist in "/usr/lib/modules/5.14.0-427.13.1.el9_4.x86_64/kernel/net"
+ - kernel module: "rds" doesn't exist in "/usr/lib/modules/5.14.0-427.40.1.el9_4.x86_64/kernel/net"
+
+[root@localhost ~]# bash script.sh 
+
+- Audit Result:
+ ** PASS **
+ - kernel module: "sctp" doesn't exist in "/usr/lib/modules/5.14.0-427.13.1.el9_4.x86_64/kernel/net"
+ - kernel module: "sctp" doesn't exist in "/usr/lib/modules/5.14.0-427.40.1.el9_4.x86_64/kernel/net"
+
+[root@localhost ~]# bash script.sh 
+
+- Audit Result:
+ ** FAIL **
+ - Reason(s) for audit failure:
+
+ - "net.ipv4.ip_forward" is not set in an included file
+ ** Note: "net.ipv4.ip_forward" may be set in a file that's ignored by the load procedure **
+ - "net.ipv6.conf.all.forwarding" is not set in an included file
+ ** Note: "net.ipv6.conf.all.forwarding" may be set in a file that's ignored by the load procedure **
+
+
+- Correctly set:
+
+ - "net.ipv4.ip_forward" is correctly set to "0" in the running configuration
+ - "net.ipv6.conf.all.forwarding" is correctly set to "0" in the running configuration
+
+[root@localhost ~]# bash test.sh 
+net.ipv4.conf.all.send_redirects = 0
+net.ipv4.conf.default.send_redirects = 0
+net.ipv4.route.flush = 1
+[root@localhost ~]# bash script.sh 
+
+- Audit Result:
+ ** FAIL **
+ - Reason(s) for audit failure:
+
+ - "net.ipv4.conf.all.send_redirects" is not set in an included file
+ ** Note: "net.ipv4.conf.all.send_redirects" may be set in a file that's ignored by the load procedure **
+
+ - "net.ipv4.conf.default.send_redirects" is not set in an included file
+ ** Note: "net.ipv4.conf.default.send_redirects" may be set in a file that's ignored by the load procedure **
+
+
+
+- Correctly set:
+
+ - "net.ipv4.conf.all.send_redirects" is correctly set to "0" in the running configuration
+ - "net.ipv4.conf.default.send_redirects" is correctly set to "0" in the running configuration
+
+[root@localhost ~]# bash script.sh 
+
+- Audit Result:
+ ** FAIL **
+ - Reason(s) for audit failure:
+
+ - "net.ipv4.icmp_ignore_bogus_error_responses" is not set in an included file
+ ** Note: "net.ipv4.icmp_ignore_bogus_error_responses" may be set in a file that's ignored by the load procedure **
+
+
+
+- Correctly set:
+
+ - "net.ipv4.icmp_ignore_bogus_error_responses" is correctly set to "1" in the running configuration
+
+[root@localhost ~]# bash script.sh 
+
+- Audit Result:
+ ** FAIL **
+ - Reason(s) for audit failure:
+
+ - "net.ipv4.icmp_echo_ignore_broadcasts" is not set in an included file
+ ** Note: "net.ipv4.icmp_echo_ignore_broadcasts" may be set in a file that's ignored by the load procedure **
+
+
+
+- Correctly set:
+
+ - "net.ipv4.icmp_echo_ignore_broadcasts" is correctly set to "1" in the running configuration
+
+[root@localhost ~]# bash test.sh 
+net.ipv6.conf.all.accept_redirects = 0
+net.ipv6.conf.default.accept_redirects = 0
+net.ipv6.route.flush = 1
+[root@localhost ~]# bash script.sh 
+
+- Audit Result:
+ ** FAIL **
+ - Reason(s) for audit failure:
+
+ - "net.ipv4.conf.all.accept_redirects" is incorrectly set to "1" in the running configuration and should have a value of: "0"
+ - "net.ipv4.conf.all.accept_redirects" is not set in an included file
+ ** Note: "net.ipv4.conf.all.accept_redirects" may be set in a file that's ignored by the load procedure **
+
+ - "net.ipv4.conf.default.accept_redirects" is incorrectly set to "1" in the running configuration and should have a value of: "0"
+ - "net.ipv4.conf.default.accept_redirects" is not set in an included file
+ ** Note: "net.ipv4.conf.default.accept_redirects" may be set in a file that's ignored by the load procedure **
+
+ - "net.ipv6.conf.all.accept_redirects" is not set in an included file
+ ** Note: "net.ipv6.conf.all.accept_redirects" may be set in a file that's ignored by the load procedure **
+
+ - "net.ipv6.conf.default.accept_redirects" is not set in an included file
+ ** Note: "net.ipv6.conf.default.accept_redirects" may be set in a file that's ignored by the load procedure **
+
+
+
+- Correctly set:
+
+ - "net.ipv6.conf.all.accept_redirects" is correctly set to "0" in the running configuration
+ - "net.ipv6.conf.default.accept_redirects" is correctly set to "0" in the running configuration
+
+[root@localhost ~]# bash test.sh 
+net.ipv4.conf.all.secure_redirects = 0
+net.ipv4.conf.default.secure_redirects = 0
+net.ipv4.route.flush = 1
+[root@localhost ~]# bash script.sh 
+
+- Audit Result:
+ ** FAIL **
+ - Reason(s) for audit failure:
+
+ - "net.ipv4.conf.all.secure_redirects" is not set in an included file
+ ** Note: "net.ipv4.conf.all.secure_redirects" may be set in a file that's ignored by the load procedure **
+
+ - "net.ipv4.conf.default.secure_redirects" is not set in an included file
+ ** Note: "net.ipv4.conf.default.secure_redirects" may be set in a file that's ignored by the load procedure **
+
+
+
+- Correctly set:
+
+ - "net.ipv4.conf.all.secure_redirects" is correctly set to "0" in the running configuration
+ - "net.ipv4.conf.default.secure_redirects" is correctly set to "0" in the running configuration
+
+root@localhost ~]# bash script.sh 
+
+- Audit Result:
+ ** FAIL **
+ - Reason(s) for audit failure:
+
+ - "net.ipv4.conf.all.rp_filter" is incorrectly set to "0" in the running configuration and should have a value of: "1"
+ - "net.ipv4.conf.all.rp_filter" is not set in an included file
+ ** Note: "net.ipv4.conf.all.rp_filter" may be set in a file that's ignored by the load procedure **
+
+
+
+- Correctly set:
+
+ - "net.ipv4.conf.default.rp_filter" is correctly set to "1" in the running configuration
+ - "net.ipv4.conf.default.rp_filter" is correctly set to "1" in "/usr/lib/sysctl.d/50-redhat.conf"
+
+[root@localhost ~]# bash script.sh 
+
+- Audit Result:
+ ** FAIL **
+ - Reason(s) for audit failure:
+
+ - "net.ipv4.conf.all.log_martians" is not set in an included file
+ ** Note: "net.ipv4.conf.all.log_martians" may be set in a file that's ignored by load procedure **
+
+ - "net.ipv4.conf.default.log_martians" is not set in an included file
+ ** Note: "net.ipv4.conf.default.log_martians" may be set in a file that's ignored by load procedure **
+
+
+
+- Correctly set:
+
+ - "net.ipv4.conf.all.log_martians" is correctly set to "1" in the running configuration
+ - "net.ipv4.conf.default.log_martians" is correctly set to "1" in the running configuration
+
+[root@localhost ~]# bash script.sh 
+
+- Audit Result:
+ ** FAIL **
+ - Reason(s) for audit failure:
+
+ - "net.ipv4.tcp_syncookies" is not set in an included file
+ ** Note: "net.ipv4.tcp_syncookies" May be set in a file that's ignored by load procedure **
+
+
+
+- Correctly set:
+
+ - "net.ipv4.tcp_syncookies" is correctly set to "1" in the running configuration
+
+
 ```
 
+```bash
+[tom@TP3 ~]$ bash script.sh 
+
+- Audit Result:
+ *** PASS ***
+- * Correctly set * :
+
+ - File: "/etc/ssh/sshd_config":
+ - Correct: mode (0600), owner (root), and group owner (root) configured
+```
+
+```bash
+[tom@TP3 ~]$ bash script.sh 
+
+- Audit Result:
+ ** PASS **
+ - * Correctly configured * :
+ - No openSSH private keys found
+```
+
+```bash
+[tom@TP3 ~]$ bash script.sh 
+
+- Audit Result:
+ ** PASS **
+ - * Correctly configured * :
+ - File: "/etc/ssh/ssh_host_ed25519_key.pub"
+ - Correct: mode: "0644", owner: "root", and group owner: "root" configured
+ - File: "/etc/ssh/ssh_host_ecdsa_key.pub"
+ - Correct: mode: "0644", owner: "root", and group owner: "root" configured
+ - File: "/etc/ssh/ssh_host_rsa_key.pub"
+ - Correct: mode: "0644", owner: "root", and group owner: "root" configured
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep -Pi -- '^ciphers\h+\"?([^#\n\r]+,)?((3des|blowfish|cast128|aes(128|192|256))-
+cbc|arcfour(128|256)?|rijndael-cbc@lysator\.liu\.se|chacha20-poly1305@openssh\.com)\b'
+grep: the -P option only supports a single pattern
+```
+
+```bash
+[tom@TP3 ~]$ sudo !!
+sudo sshd -T | grep -Pi -- 'kexalgorithms\h+([^#\n\r]+,)?(diffie-hellman-group1-sha1|diffie-hellman-group14-
+sha1|diffie-hellman-group-exchange-sha1)\b'
+grep: the -P option only supports a single pattern
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep -Pi -- 'macs\h+([^#\n\r]+,)?(hmac-md5|hmac-md5-96|hmac-ripemd160|hmac-sha1-96|umac-
+64@openssh\.com|hmac-md5-etm@openssh\.com|hmac-md5-96-etm@openssh\.com|hmac-ripemd160-etm@openssh\.com|hmac-
+sha1-96-etm@openssh\.com|umac-64-etm@openssh\.com|umac-128-etm@openssh\.com)\b'
+grep: the -P option only supports a single pattern
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep -Pi -- '^\h*(allow|deny)(users|groups)\h+\H+'
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep -Pi -- '^banner\h+\/\H+'
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep -Pi -- '(clientaliveinterval|clientalivecountmax)'
+clientaliveinterval 0
+clientalivecountmax 3
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep -i disableforwarding
+disableforwarding no
+
+Edit the /etc/ssh/sshd_config file to set the DisableForwarding parameter to yes
+above any Include entry as follows:
+
+DisableForwarding yes
+
+[tom@TP3 ~]$ sudo sshd -T | grep -i disableforwarding
+disableforwarding yes
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep gssapiauthentication
+gssapiauthentication yes
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep hostbasedauthentication
+hostbasedauthentication no
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep ignorerhosts
+ignorerhosts yes
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep logingracetime
+logingracetime 60
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep loglevel
+loglevel INFO
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep maxauthtries
+maxauthtries 4
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | awk '$1 ~ /^\s*maxstartups/{split($2, a, ":");{if(a[1] > 10 || a[2] > 30 || a[3] > 60) print $0}}'
+maxstartups 10:30:100
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep -i maxsessions
+maxsessions 10
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep permitemptypasswords
+permitemptypasswords no
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep permitrootlogin
+permitrootlogin no
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep permituserenvironment
+permituserenvironment no
+```
+
+```bash
+[tom@TP3 ~]$ sudo sshd -T | grep -i usepam
+usepam yes
+```
+
+```bash
+[tom@TP3 ~]$ stat -Lc 'Access: (%#a/%A) Uid: ( %u/ %U) Gid: ( %g/ %G)' /etc/passwd
+Access: (0644/-rw-r--r--) Uid: ( 0/ root) Gid: ( 0/ root)
+```
+
+```bash
+[tom@TP3 ~]$ stat -Lc 'Access: (%#a/%A) Uid: ( %u/ %U) Gid: { %g/ %G)' /etc/passwd-
+Access: (0644/-rw-r--r--) Uid: ( 0/ root) Gid: { 0/ root)
+```
+
+```bash
+[tom@TP3 ~]$ stat -Lc 'Access: (%#a/%A) Uid: ( %u/ %U) Gid: ( %g/ %G)' /etc/group
+Access: (0644/-rw-r--r--) Uid: ( 0/ root) Gid: ( 0/ root)
+```
+
+```bash
+[tom@TP3 ~]$ stat -Lc 'Access: (%#a/%A) Uid: ( %u/ %U) Gid: ( %g/ %G)' /etc/group-
+Access: (0644/-rw-r--r--) Uid: ( 0/ root) Gid: ( 0/ root)
+```
+
+```bash
+[tom@TP3 ~]$ stat -Lc 'Access: (%#a/%A) Uid: ( %u/ %U) Gid: ( %g/ %G)' /etc/shadow
+Access: (0/----------) Uid: ( 0/ root) Gid: ( 0/ root)
+```
+
+```bash
+[tom@TP3 ~]$ stat -Lc 'Access: (%#a/%A) Uid: ( %u/ %U) Gid: ( %g/ %G)' /etc/shadow-
+Access: (0/----------) Uid: ( 0/ root) Gid: ( 0/ root)
+```
+
+```bash
+[tom@TP3 ~]$ stat -Lc 'Access: (%#a/%A) Uid: ( %u/ %U) Gid: ( %g/ %G)' /etc/gshadow
+Access: (0/----------) Uid: ( 0/ root) Gid: ( 0/ root)
+```
+
+```bash
+[tom@TP3 ~]$ stat -Lc 'Access: (%#a/%A) Uid: ( %u/ %U) Gid: ( %g/ %G)' /etc/gshadow-
+Access: (0/----------) Uid: ( 0/ root) Gid: ( 0/ root)
+```
+
+```bash
+[tom@TP3 ~]$ stat -Lc 'Access: (%#a/%A) Uid: ( %u/ %U) Gid: ( %g/ %G)' /etc/shells
+Access: (0644/-rw-r--r--) Uid: ( 0/ root) Gid: ( 0/ root)
+```
+
+```bash
+[tom@TP3 ~]$ sudo [ -e "/etc/security/opasswd.old" ] && stat -Lc
+```
+
+```bash
+[tom@TP3 ~]$ rpm -q libselinux
+libselinux-3.6-1.el9.x86_64
+```
+
+```bash
+[tom@TP3 ~]$ sudo grubby --info=ALL | grep -Po '(selinux|enforcing)=0\b'
+```
+
+```bash
+[tom@TP3 ~]$ grep -E '^\s*SELINUXTYPE=(targeted|mls)\b' /etc/selinux/config
+SELINUXTYPE=targeted
+```
+
+```bash
+[tom@TP3 ~]$ getenforce
+Permissive
+```
+
+```bash
+[tom@TP3 ~]$ sudo !!
+sudo bash script.sh 
+
+- Audit Result:
+ ** PASS **
+ - All audit configuration files are mode: "640" or more restrictive
+```
+
+```bash
+[tom@TP3 ~]$ sudo find /etc/audit/ -type f \( -name '*.conf' -o -name '*.rules' \) ! -user root
+```
+
+```bash
+[tom@TP3 ~]$ sudo find /etc/audit/ -type f \( -name '*.conf' -o -name '*.rules' \) ! -group root
+```
+
+```bash
+[tom@TP3 ~]$ bash script.sh 
+
+- Audit Result:
+ ** PASS **
+ - * Correctly configured * :
+ - Audit tool "/sbin/auditctl" is correctly configured to mode: "0755"
+ - Audit tool "/sbin/aureport" is correctly configured to mode: "0755"
+ - Audit tool "/sbin/ausearch" is correctly configured to mode: "0755"
+ - Audit tool "/sbin/autrace" is correctly configured to mode: "0750"
+ - Audit tool "/sbin/auditd" is correctly configured to mode: "0755"
+ - Audit tool "/sbin/augenrules" is correctly configured to mode: "0755"
+```
+
+```bash
+[tom@TP3 ~]$ stat -Lc "%n %U" /sbin/auditctl /sbin/aureport /sbin/ausearch /sbin/autrace /sbin/auditd /sbin/augenrules | awk '$2 != "root" {print}'
+```
+
+```bash
+[tom@TP3 ~]$ stat -Lc "%n %G" /sbin/auditctl /sbin/aureport /sbin/ausearch /sbin/autrace /sbin/auditd /sbin/augenrules |
+awk '$2 != "root" {print}'
 ```
 ## 2. Conf SSH
 
@@ -38,7 +604,7 @@ CIS est une boîte qui notamment édite des guides de configuration
 https://learn.microsoft.com/fr-fr/viva/glint/setup/sftp-ssh-key-gen#create-an-ssh-key-pair-on-macintosh-or-linux
 https://www.openssh.com/manual.html
 https://www.ssh.com/academy/ssh/command
-```
+```bash
 tom@Debian:~$ ssh-keygen -t rsa -b 4096
 Generating public/private rsa key pair.
 Enter file in which to save the key (/home/tom/.ssh/id_rsa): 
@@ -61,7 +627,7 @@ The key's randomart image is:
 |        .        |
 +----[SHA256]-----+
 ```
-```
+```bash
 tom@Debian:~/.ssh$ cat id_rsa
 -----BEGIN OPENSSH PRIVATE KEY-----
 b3BlbnNzaC1rZX[..........]zH7cKx1pnTglIHFNNVqBsFtxhQ1jbSyG97Sne6
@@ -70,12 +636,12 @@ WN+0GlkXxpsAAAAKdG9tQERlYmlhbgE=
 -----END OPENSSH PRIVATE KEY-----
 
 ```
-```
+```bash
 tom@Debian:~/.ssh$ cat id_rsa.pub 
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC61oZc1SzI2EcGFo26CbIUOTNBVx5Tlp2kY0GPaxkxkM7r2U4NavsqBV54BnLhEgDNVu21mUqzFzKwkOVvhwLNEE4WPZ8FpUbb5Uh+wVGabg2OYD8BCqCQUCjLrwD0N/wxUu5j7xs5HpEVbYe4fHlbrQeP1F6PBswHK8jfNBwLOPt4gPxBnTzNz1STP3UDnF+6NCdKHwClxhxmX/YxaBYBLmoUidKKxzl3rCJBikj4IsQE+n60ossH1In0SWk+n6yaGbQp5mQW3dNVZDxJR22AJ/Yu5hMdpOboalSTi3RJUiYwbknV9nclImEgCy1HLPq5whceoIJIMOqNdkc6SdUdy4Fvc4Ob2D8pXyspx5180F5y6bwI6tiprt2+T1zoUI3c8AS5ZIUGGZ21O9b3NER0fmC6W0lw0Vn1PT9/SC9Bb1KtpacA9HDhl63okAFvpr55pRosEGaDBPgKErbL7oZ3/Y3zJ6cDMa8zyCoWDoqQx4dP0pn7Kq2UucVkZfNtse83vDTBSL/5yHDZGxZbwfgL6HhqQhOF3CozoXIoaUziFr7hKwDFTYKPNECOnCUhIHsaevntwdvc+u8i1ia7tptr+tGih5GAD3xBXttMR8eVcWVmJk/CVnUVG3j9MXIZBKz03+LtavHgcXaJcGdaouvstdDynleJxG9qtv4Ihf0aPQ== tom@Debian
 
 ```
-```
+```bash
 tom@Debian:~/.ssh$ ssh-copy-id -i ~/.ssh/id_rsa.pub tom@10.3.1.10     
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/tom/.ssh/id_rsa.pub"
 /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
@@ -87,30 +653,30 @@ Number of key(s) added: 1
 Now try logging into the machine, with:   "ssh 'tom@10.3.1.10'"
 and check to make sure that only the key(s) you wanted were added.
 ```
-```
+```bash
 [tom@TP3 ~]$ sudo cat  /etc/ssh/sshd_config
 [.......]
 PasswordAuthentication no
 PermitRootLogin no
 PubkeyAuthentication yes
 ```
-```
+```bash
 [tom@TP3 ~]$ sudo systemctl restart sshd
 ```
-```
+```bash
 tom@Debian:~$ ssh tom@10.3.1.10
 Last login: Mon Jan 13 10:44:48 2025 from 10.3.1.1
 [tom@TP3 ~]$ 
 
 ```
-```
+```bash
 [tom@TP3 ~]$ sudo openssl dhparam -out /etc/ssh/dh_param.pem 4096
 Generating DH parameters, 4096 bit long safe prime
 ......................................................................................................................................+...............................................................................+.............................................................................................................................................................................................................................................+................................................................................................................................................................................................................................................................................................................................................................................................................................+...............................................................................................................................+......+............................................................................................................................................................................................................................................................................................................................+..............................................................................................................................................................................+............................................................................+................................................................................................+.................+..............+..........................................................................................................................................................................+...............................................................................................................+.........................................................................................................................................................................+......+..............................+.....................................................................................................+......................................................................................................................................+.................................................................................+........................................................................................................................................+...........................................................................................................................................................................................................................................................................................................................+....................................................+.................................................................................................................................................................................................................................................................................................................................................................................+...........................................................................................................................+..............................................................................................................................................................................................................+...............................................................................................................................................................................................................................................................................................+.....................+...........................................................................................................................................................................................................................................................+.......................................................+...........................................................................................................................................................................................................................................................................................................................+.............+...........................................................................................................................................................+............................................................................................................................................................................................................................................................................................................................................................................................................+.............................................................................+.................................................................+...................................+.................................................................................................................................................................................................................................................................................................+..............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................+..................................................................................................................................+.......................................................................................+..........................................
 ................................................................................+......................................+..........................................................................................................................................................................................................................+................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................+...........................................................................................................................................................................................................................................................................................................................+.........................................+.............................................................................................................................................................................................................................................................................................................................................................................................................................................................................................+......................................+................................................................................+....................................+.......................................................................................................................+.....+............................................................+........................................................................+.................................................................................................................................................................................................................................................................................................................................................................................................................................++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*++*
 
 ```
-```
+```bash
 [tom@TP3 ~]$ sudo cat  /etc/ssh/sshd_config
 [.......]
 PasswordAuthentication no
@@ -119,14 +685,14 @@ PubkeyA
 KexAlgorithms diffie-hellman-group-exchange-sha256
 
 ```
-```
+```bash
 [tom@TP3 ~]$ sudo systemctl restart sshd
 ```
 
 
 🌞 **Clés de chiffrement fortes pour le client**
 
-```
+```bash
 tom@Debian:~/.ssh$ ssh-keygen -t ed25519 -a 100 -f ~/.ssh/id_ed25519 -C "Thaume-SSH-TP3"        
 Generating public/private ed25519 key pair.
 Enter passphrase (empty for no passphrase): 
@@ -148,7 +714,7 @@ The key's randomart image is:
 |           .+o. .|
 +----[SHA256]-----+
 ```
-```
+```bash
 tom@Debian:~/.ssh$ ls
 id_ed25519  id_ed25519.pub  id_rsa  id_rsa.pub  known_hosts  known_hosts.old
 tom@Debian:~/.ssh$ cat id_ed25519
@@ -159,7 +725,7 @@ tom@Debian:~/.ssh$ cat id_ed25519.pub
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILGnqjEq483y7jgfIW6tCyuRXYM0XI5ogg4LhP/16AaJ Thaume-SSH-TP3
 remote system.
 ```
-```
+```bash
 tom@Debian:~/.ssh$ ssh-copy-id -i ~/.ssh/id_ed25519.pub tom@10.3.1.10
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/tom/.ssh/id_ed25519.pub"
 /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
@@ -172,7 +738,7 @@ and check to make sure that only the key(s) you wanted were added.
 ```
 
 🌞 **Connectez-vous en SSH à votre VM avec cette paire de clés**
-```
+```bash
 tom@Debian:~$ ssh -i ~/.ssh/id_ed25519 -vvvv tom@10.3.1.10
 OpenSSH_9.2p1 Debian-2+deb12u4, OpenSSL 3.0.15 3 Sep 2024
 debug1: Reading configuration data /etc/ssh/ssh_config
@@ -432,7 +998,7 @@ Le Dot est une techno qui va dans ce sens : DoT pour DNS over TLS. On fait nos r
 
 🌞 **Configurer la machine pour qu'elle fasse du DoT**
 
-```
+```bash
 [tom@TP3 ~]$ sudo dnf install  systemd-resolved -y
 Last metadata expiration check: 0:03:50 ago on Thu 16 Jan 2025 02:42:21 PM CET.
 Package systemd-resolved-252-46.el9_5.2.0.1.x86_64 is already installed.
@@ -440,7 +1006,7 @@ Dependencies resolved.
 Nothing to do.
 Complete!
 ```
-```
+```bash
 [tom@TP3 ~]$ sudo cat /etc/systemd/resolved.conf 
 #  This file is part of systemd.
 #
@@ -478,7 +1044,7 @@ DNSOverTLS=yes
 #ResolveUnicastSingleLabel=no
 
 ```
-```
+```bash
 [tom@TP3 ~]$ sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 [tom@TP3 ~]$ sudo mv /etc/resolv.conf /etc/resolv.conf.bak
 [tom@TP3 ~]$ sudo ln -s /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
@@ -486,7 +1052,7 @@ DNSOverTLS=yes
 ```
 
 🌞 **Prouvez que les requêtes DNS effectuées par la machine...**
-```
+```bash
 [tom@TP3 ~]$ dig ynov.com
 
 ; <<>> DiG 9.16.23-RH <<>> ynov.com
@@ -522,17 +1088,115 @@ AIDE est un IDS ou *Intrusion Detection System*. Les IDS c'est un type de progra
 Dans notre cas, AIDE, il surveille que certains fichiers du disque n'ont pas été modifiés. Des fichiers comme `/etc/shadow` par exemple.
 
 🌞 **Installer et configurer AIDE**
-```
+```bash
+[tom@TP3 ~]$ sudo aide --init
+Start timestamp: 2025-01-22 19:13:08 +0100 (AIDE 0.16)
+AIDE initialized database at /var/lib/aide/aide.db.new.gz
+
+Number of entries:      40840
+
+---------------------------------------------------
+The attributes of the (uncompressed) database(s):
+---------------------------------------------------
+
+/var/lib/aide/aide.db.new.gz
+  MD5      : qNtoADVFBTxiUDA7CbqL5w==
+  SHA1     : nyJWN10o2ssuem97ZMUpeM8T0fg=
+  RMD160   : ugZf6wFlyuMRqS77vNrFwRwBWJQ=
+  TIGER    : kgpHXxpBu7UWZdxMhg47D8K24e2m+UGV
+  SHA256   : jWdKkQqJ4F8/fSVCvFaWlUzLIM7gOsss
+             pnQHKqs7zpo=
+  SHA512   : Sv+mc0E5Rj6cElmUgzsWeHt5zd95WxmS
+             EN1C1+TxbjUr/SqlKN1Kk4E/Vj9ggIZ9
+             h9895pcxRPV3bCq+2Z8aZg==
+
+
+End timestamp: 2025-01-22 19:13:13 +0100 (run time: 0m 5s)
+
+[tom@TP3 ~]$ sudo mv /var/lib/aide/aide.db.new.gz /var/lib/aide/aide.db.gz
+
 
 ```
 
 
 🌞 **Scénario de modification**
-```
+```bash
+[tom@TP3 ~]$ sudo nano /etc/ssh/sshd_config
+[tom@TP3 ~]$ sudo aide --check
+Start timestamp: 2025-01-22 19:17:16 +0100 (AIDE 0.16)
+AIDE found differences between database and filesystem!!
+
+Summary:
+  Total number of entries:      40840
+  Added entries:                0
+  Removed entries:              0
+  Changed entries:              1
+
+---------------------------------------------------
+Changed entries:
+---------------------------------------------------
+
+f   ...    .C... : /etc/ssh/sshd_config
+
+---------------------------------------------------
+Detailed information about changes:
+---------------------------------------------------
+
+File: /etc/ssh/sshd_config
+  SHA512   : eP83vneHRw8+Z3obZ/gLbGCKZVLz/JPR | NcRK+jCtGMxnJtr0VIfE7lORxiw11Rbx
+             mCSVZ5e4YyVhED9xBSNMm6CHu/LY7tjq | uY/Zg+BpH6HG/KnSzKGysVMHQkp4k7eY
+             Z011aHRt7C6NvbcFMfPv9g==         | By3YDo+d9QDdN3nIGXNREA==
+
+
+---------------------------------------------------
+The attributes of the (uncompressed) database(s):
+---------------------------------------------------
+
+/var/lib/aide/aide.db.gz
+  MD5      : qNtoADVFBTxiUDA7CbqL5w==
+  SHA1     : nyJWN10o2ssuem97ZMUpeM8T0fg=
+  RMD160   : ugZf6wFlyuMRqS77vNrFwRwBWJQ=
+  TIGER    : kgpHXxpBu7UWZdxMhg47D8K24e2m+UGV
+  SHA256   : jWdKkQqJ4F8/fSVCvFaWlUzLIM7gOsss
+             pnQHKqs7zpo=
+  SHA512   : Sv+mc0E5Rj6cElmUgzsWeHt5zd95WxmS
+             EN1C1+TxbjUr/SqlKN1Kk4E/Vj9ggIZ9
+             h9895pcxRPV3bCq+2Z8aZg==
+
+
+End timestamp: 2025-01-22 19:17:23 +0100 (run time: 0m 7s)
 
 ```
 
 🌞 **Timer et service systemd**
-```
+```bash
+[tom@TP3 ~]$ sudo cat /etc/systemd/system/aide-check.timer
+[Unit]
+Description=Run AIDE Check every 10 minutes
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=10min
+Unit=aide-check.service
+
+[Install]
+WantedBy=timers.target
+[tom@TP3 ~]$ 
+
+[tom@TP3 ~]$ sudo systemctl enable aide-check.timer
+Created symlink /etc/systemd/system/timers.target.wants/aide-check.timer → /etc/systemd/system/aide-check.timer.
+
+[tom@TP3 ~]$ sudo systemctl start aide-check.timer
+[tom@TP3 ~]$ sudo systemctl status aide-check.timer
+● aide-check.timer - Run AIDE Check every 10 minutes
+     Loaded: loaded (/etc/systemd/system/aide-check.timer; enabled; preset: disabled)
+     Active: active (waiting) since Wed 2025-01-22 19:21:07 CET; 16s ago
+      Until: Wed 2025-01-22 19:21:07 CET; 16s ago
+ 
+
+Jan 22 19:21:07 TP3 systemd[1]: Started Run AIDE Check every 10 minutes.
+[tom@TP3 ~]$ 
+
+
 
 ```
